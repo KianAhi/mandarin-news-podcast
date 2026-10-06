@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:atom="http://www.w3.org/2005/Atom">
+ <channel>
+  <title>每日中文新闻 · Mandarin News Daily</title>
+  <link>https://kianahi.github.io/mandarin-news-podcast/</link>
+  <atom:link href="https://kianahi.github.io/mandarin-news-podcast/feed.xml" rel="self" type="application/rss+xml"/>
+  <language>zh-cn</language>
+  <description>A private daily HSK 4 Mandarin news briefing: world, China and Germany, with personal vocabulary review. Generated automatically.</description>
+  <itunes:author>Kian</itunes:author>
+  <itunes:image href="https://kianahi.github.io/mandarin-news-podcast/cover.png"/>
+  <itunes:category text="Education"><itunes:category text="Language Learning"/></itunes:category>
+  <itunes:explicit>false</itunes:explicit>
+  <itunes:block>Yes</itunes:block>
+  <item>
+   <title>欢迎 · Welcome (test episode)</title>
+   <description>A short test episode to confirm the feed works.</description>
+   <enclosure url="https://kianahi.github.io/mandarin-news-podcast/episodes/mandarin-news-2026-10-06.mp3" length="151554" type="audio/mpeg"/>
+   <guid isPermaLink="false">mandarin-news-2026-10-06.mp3</guid>
+   <pubDate>Tue, 06 Oct 2026 07:59:12 +0000</pubDate>
+   <itunes:duration>18</itunes:duration>
+   <itunes:explicit>false</itunes:explicit>
+  </item>
+ </channel>
+</rss>
