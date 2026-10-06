@@ -12,3 +12,6 @@ Private, auto-generated HSK 4 Mandarin news podcast.
   - `check_script.py`: flags words in an episode script that are not in `known_words.json` or the vocab doc
   - `bank.json`: 11,470 HSK 1–9 words with frequency ranks, from [complete-hsk-vocabulary](https://github.com/drkameleon/complete-hsk-vocabulary) (MIT)
   - `pseudowords.json`: fake two-character words (checked against the jieba dictionary) used to catch over-claiming
+- `vocab_import.py`: helper for importing teacher material (lookup of pinyin/meaning/HSK, saves teacher example sentences)
+  - `teacher_sentences.json`: example sentences from teachers, keyed by word; used in the podcast's vocabulary review
+  - `imports.csv`: log of imports
