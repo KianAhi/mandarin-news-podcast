@@ -1,0 +1,27 @@
+{
+ "date": "2026-10-06",
+ "method": "adaptive yes/no test with pseudowords + logistic model on ln(frequency rank) and HSK level",
+ "items_answered": 68,
+ "fakes_answered": 12,
+ "false_alarm_rate": 0.0,
+ "meaning_checks": 8,
+ "meaning_checks_failed": [],
+ "model": {
+  "intercept": 6.276,
+  "ln_rank": -0.416,
+  "hsk": -1.054
+ },
+ "estimated_known_words_in_bank": 1803,
+ "known_list_size": 679,
+ "coverage_by_hsk_level": {
+  "HSK 1": 0.9,
+  "HSK 2": 0.721,
+  "HSK 3": 0.467,
+  "HSK 4": 0.204,
+  "HSK 5": 0.074,
+  "HSK 6": 0.024,
+  "HSK 7-9": 0.007
+ },
+ "estimated_hsk_level": 1,
+ "warnings": []
+}

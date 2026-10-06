@@ -16,6 +16,8 @@ Commands (all print JSON):
   levelquiz.py round2 <answers.json> [--seed N]      -> items for round 2 (32: around the learner's threshold + 4 fakes)
   levelquiz.py checks <answers.json> [--seed N]      -> up to 8 meaning checks (4 options each) on claimed words
   levelquiz.py estimate <answers.json> [--date D]    -> fits the model, writes ../known_words.json + ../level_profile.json
+  Add --pinyin to round1/round2 to show pinyin with each item (fakes are then ones whose sound matches no real word).
+  For a listening podcast, the pinyin mode is the better measure.
 
 answers.json: {"answers": {"<item>": true|false, ...}, "checks": {"<word>": true|false, ...}}
   item = the Chinese word (or fake) shown; true = "I know it". checks: true = picked the right meaning.
@@ -27,7 +29,11 @@ ROOT = os.path.dirname(HERE)
 BANK = json.load(open(os.path.join(HERE, "bank.json"), encoding="utf-8"))
 FAKES = json.load(open(os.path.join(HERE, "pseudowords.json"), encoding="utf-8"))
 BY_W = {b["w"]: b for b in BANK}
-FAKESET = set(FAKES)
+FAKES_PY = json.load(open(os.path.join(HERE, "pseudowords_pinyin.json"), encoding="utf-8"))  # fakes whose sound is no real word
+PINYIN = "--pinyin" in sys.argv  # show pinyin with each item: measures words known by sound + sight (better for listening)
+if PINYIN:
+    FAKES = sorted(FAKES_PY)
+FAKESET = set(FAKES) | set(FAKES_PY)
 BANDS = [1, 300, 700, 1500, 3000, 5000, 8000, 12000, 17000, 25000, 40000]
 KNOWN_P = 0.8
 
@@ -43,7 +49,7 @@ def rng():
 
 
 def item(b):
-    return {"item": b["w"]}
+    return {"item": b["w"], "py": b["py"]} if PINYIN else {"item": b["w"]}
 
 
 def eligible(b):
@@ -51,7 +57,7 @@ def eligible(b):
 
 
 def mix(words, fakes, r):
-    items = [item(b) for b in words] + [{"item": f} for f in fakes]
+    items = [item(b) for b in words] + [({"item": f, "py": FAKES_PY[f]} if PINYIN else {"item": f}) for f in fakes]
     r.shuffle(items)
     return {"items": items, "n_words": len(words), "n_fakes": len(fakes)}
 

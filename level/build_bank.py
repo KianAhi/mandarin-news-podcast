@@ -3,6 +3,7 @@
 Usage: build_bank.py <path/to/complete.json> <path/to/jieba/dict.txt>  (dict filters out real words)"""
 import sys, json, random, re, os
 import rjieba
+from pypinyin import lazy_pinyin, Style  # pinyin from pypinyin: picks the common reading, lowercase
 src = json.load(open(sys.argv[1], encoding="utf-8"))
 out = os.path.dirname(os.path.abspath(__file__))
 bank = []
@@ -15,7 +16,7 @@ for e in src:
     hsk = pick("new") or pick("newest") or pick("old") or 7
     hsk = min(hsk, 7)  # 7 = HSK 7-9
     f = e["forms"][0]
-    bank.append({"w": w, "py": f["transcriptions"]["pinyin"], "en": "; ".join(f["meanings"][:2])[:80],
+    bank.append({"w": w, "py": " ".join(lazy_pinyin(w, style=Style.TONE)), "en": "; ".join(f["meanings"][:2])[:80],
                  "rank": e.get("frequency") or 1000000, "hsk": hsk})
 bank.sort(key=lambda x: x["rank"])
 json.dump(bank, open(os.path.join(out, "bank.json"), "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
