@@ -18,11 +18,11 @@ c) If the Docs tools are not available in this run, use pod/vocab_cache.json as 
 d) Run `python3 pod/srs.py select words.json TODAY` → the 3–8 words to use today. Use exactly these; don't pick words yourself.
 
 ## 2. News
-Pick 6 stories from the past 24 hours (WebSearch + WebFetch):
-- World (2): Al Jazeera (https://www.aljazeera.com/) is the main source.
-- China (2): domestic news from inside China (society, economy, cities, culture, policy), e.g. Xinhua, China Daily, CGTN, South China Morning Post. Report factually and neutrally; where a source is state media, don't repeat its framing as fact.
-- Germany (2): Tagesschau's top stories. tagesschau.de may not be fetchable, so find its current top stories via WebSearch (e.g. allowed_domains ["tagesschau.de"]) and confirm details with another reputable outlet (DW, Spiegel, Zeit).
-If a source can't be reached, use another reputable outlet and mention it in the final reply. Check key facts.
+Pick 6 stories from the past 24 hours:
+- **World (2): Al Jazeera via the Webz.io connector.** Use the Webz.io news-search connector tools (MCP) to find Al Jazeera's latest articles: query `site:aljazeera.com`, newest first, published in the last 24 hours. Prefer major world stories; use the article text the connector returns. If the connector isn't available or returns nothing, fall back to WebSearch for Al Jazeera's top stories and say so in the final reply.
+- **China (2):** domestic news from inside China (society, economy, cities, culture, policy), e.g. Xinhua, China Daily, CGTN, South China Morning Post (WebSearch + WebFetch). Report factually and neutrally; where a source is state media, don't repeat its framing as fact.
+- **Germany (2): taz (https://taz.de/).** Get taz's current top stories, trying in this order: its RSS feed with curl (`curl -sL "https://taz.de/!p4608;rss/"`, then `curl -sL https://taz.de/rss.xml`), then WebFetch of https://taz.de/, then WebSearch restricted to taz.de. taz writes in German; summarise in simple Chinese. Confirm key facts with a second outlet if a detail seems unclear.
+If a source can't be reached, use another reputable outlet for that section and name the fallback in the final reply. Check key facts.
 
 ## 3. Script (simplified Chinese only, written to be spoken)
 - Mainly words Kian knows: pod/known_words.json plus the vocabulary words. Short sentences.
@@ -57,4 +57,4 @@ git fetch -q origin && test "$(git rev-parse HEAD)" = "$(git rev-parse origin/ma
 stats.json gives heard / last_heard / next_due per word. Re-read the table (`view` + `parentId`) for a fresh `rev`, then send ONE `update` with one op per changed cell (Heard = col 5, Last heard = col 6, Next due = col 7, 0-indexed, header = row 0; match rows by Hanzi): `{"op":"replace","target":{"kind":"cell","table":"<table id>","row":R,"col":C},"ifRev":<rev>,"with":{"from":{"kind":"inline","content":"<value>"},"as":"text"}}` (load `guide` topic.editing if refused). Never touch other columns or add/delete/reorder rows. If refused because Kian edited the table, re-read once and retry; then skip and mention it.
 
 ## 7. Final reply (brief, English)
-Date, story headlines with sources, practised words, explained words, final coverage, and whether the feed (PUSHED-OK) and the doc were updated. No transcript.
+Date, story headlines with sources (and which fetch method worked for Al Jazeera and taz), practised words, explained words, final coverage, and whether the feed (PUSHED-OK) and the doc were updated. No transcript.
