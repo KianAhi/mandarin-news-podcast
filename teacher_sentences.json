@@ -13,6 +13,14 @@
    "translation": "Learning Chinese has to go step by step."
   }
  ],
+ "不划算": [
+  {
+   "date": "2026-10-07",
+   "sentence": "花这么多钱买这个不划算。",
+   "source": "Lesson 2026-10-07",
+   "translation": "It is not worth spending that much money on this."
+  }
+ ],
  "东西又贵又无聊": [
   {
    "date": "2026-10-06",
@@ -27,6 +35,22 @@
    "translation": "If things are expensive and boring, I won't go."
   }
  ],
+ "乱七八糟": [
+  {
+   "date": "2026-10-07",
+   "sentence": "他的桌子乱七八糟。",
+   "source": "Lesson 2026-10-07",
+   "translation": "His desk is a mess."
+  }
+ ],
+ "五花八门": [
+  {
+   "date": "2026-10-07",
+   "sentence": "这里的商品五花八门。",
+   "source": "Lesson 2026-10-07",
+   "translation": "There is a huge variety of products here."
+  }
+ ],
  "你说怎么办": [
   {
    "date": "2026-10-06",
@@ -39,6 +63,14 @@
    "sentence": "钱不够了，你说怎么办？",
    "source": "Teacher, lesson notes 2026-10-06",
    "translation": "We don't have enough money, what should we do?"
+  }
+ ],
+ "内卷": [
+  {
+   "date": "2026-10-07",
+   "sentence": "这个行业的内卷越来越严重。",
+   "source": "Lesson 2026-10-07",
+   "translation": "Competition in this industry is becoming increasingly intense."
   }
  ],
  "划算": [
@@ -81,6 +113,14 @@
    "sentence": "今天终于发工资了。",
    "source": "Teacher, lesson notes 2026-10-06",
    "translation": "Payday finally came today."
+  }
+ ],
+ "品牌力": [
+  {
+   "date": "2026-10-07",
+   "sentence": "苹果的品牌力很强。",
+   "source": "Lesson 2026-10-07",
+   "translation": "Apple has strong brand power."
   }
  ],
  "国庆": [
@@ -153,6 +193,14 @@
    "translation": "He doesn't like bureaucratic behaviour."
   }
  ],
+ "定制": [
+  {
+   "date": "2026-10-07",
+   "sentence": "这件西装是为他定制的。",
+   "source": "Lesson 2026-10-07",
+   "translation": "This suit was custom-made for him."
+  }
+ ],
  "实体": [
   {
    "date": "2026-10-06",
@@ -181,6 +229,14 @@
    "translation": "This process is just like climbing a mountain."
   }
  ],
+ "工作量": [
+  {
+   "date": "2026-10-07",
+   "sentence": "这个项目的工作量很大。",
+   "source": "Lesson 2026-10-07",
+   "translation": "This project has a large workload."
+  }
+ ],
  "工厂": [
   {
    "date": "2026-10-06",
@@ -207,6 +263,14 @@
    "sentence": "花这么多钱，我有点心疼。",
    "source": "Teacher, lesson notes 2026-10-06",
    "translation": "Spending this much money hurts a bit."
+  }
+ ],
+ "成分": [
+  {
+   "date": "2026-10-07",
+   "sentence": "买食品以前，要先看成分。",
+   "source": "Lesson 2026-10-07",
+   "translation": "Check the ingredients before buying food."
   }
  ],
  "投资": [
@@ -293,6 +357,14 @@
    "translation": "The round trip from here to the factory is long."
   }
  ],
+ "毛利": [
+  {
+   "date": "2026-10-07",
+   "sentence": "这款产品的毛利很高。",
+   "source": "Lesson 2026-10-07",
+   "translation": "This product has a high gross profit margin."
+  }
+ ],
  "法律": [
   {
    "date": "2026-10-06",
@@ -305,6 +377,14 @@
    "sentence": "这个问题可能跟法律有关。",
    "source": "Teacher, lesson notes 2026-10-06",
    "translation": "This issue may have to do with the law."
+  }
+ ],
+ "消费者": [
+  {
+   "date": "2026-10-07",
+   "sentence": "消费者越来越重视产品质量。",
+   "source": "Lesson 2026-10-07",
+   "translation": "Consumers increasingly value product quality."
   }
  ],
  "爱上": [
@@ -363,6 +443,14 @@
    "translation": "He's too direct when he talks."
   }
  ],
+ "破产": [
+  {
+   "date": "2026-10-07",
+   "sentence": "如果一直亏钱，这家公司可能会破产。",
+   "source": "Lesson 2026-10-07",
+   "translation": "If it keeps losing money, the company may go bankrupt."
+  }
+ ],
  "福": [
   {
    "date": "2026-10-06",
@@ -405,6 +493,14 @@
    "translation": "Emigrating takes a lot of preparation."
   }
  ],
+ "纪念品": [
+  {
+   "date": "2026-10-07",
+   "sentence": "我想买一些纪念品送给朋友。",
+   "source": "Lesson 2026-10-07",
+   "translation": "I want to buy some souvenirs for my friends."
+  }
+ ],
  "蚊子": [
   {
    "date": "2026-10-06",
@@ -433,6 +529,30 @@
    "translation": "The company scheduled the make-up day off for next week."
   }
  ],
+ "规矩": [
+  {
+   "date": "2026-10-07",
+   "sentence": "每个公司都有自己的规矩。",
+   "source": "Lesson 2026-10-07",
+   "translation": "Every company has its own rules."
+  }
+ ],
+ "记账": [
+  {
+   "date": "2026-10-07",
+   "sentence": "我每天都会记账，看看花了多少钱。",
+   "source": "Lesson 2026-10-07",
+   "translation": "I keep track of my spending every day."
+  }
+ ],
+ "讲究": [
+  {
+   "date": "2026-10-07",
+   "sentence": "他对咖啡很讲究。",
+   "source": "Lesson 2026-10-07",
+   "translation": "He is very particular about coffee."
+  }
+ ],
  "证明": [
   {
    "date": "2026-10-06",
@@ -445,6 +565,14 @@
    "sentence": "这个文件可以证明他的身份。",
    "source": "Teacher, lesson notes 2026-10-06",
    "translation": "This document can prove his identity."
+  }
+ ],
+ "诈骗": [
+  {
+   "date": "2026-10-07",
+   "sentence": "他被一个骗子骗了钱。",
+   "source": "Lesson 2026-10-07",
+   "translation": "He was scammed by a con artist."
   }
  ],
  "过程": [
@@ -475,6 +603,14 @@
    "translation": "After paying rent, I don't even have 500 left."
   }
  ],
+ "连锁店": [
+  {
+   "date": "2026-10-07",
+   "sentence": "这家连锁店在很多城市都有分店。",
+   "source": "Lesson 2026-10-07",
+   "translation": "This chain store has branches in many cities."
+  }
+ ],
  "银行账号": [
   {
    "date": "2026-10-06",
@@ -501,6 +637,14 @@
    "sentence": "很多00后喜欢用短视频。",
    "source": "Teacher, lesson notes 2026-10-06",
    "translation": "Many people born after 2000 like short videos."
+  }
+ ],
+ "骗子": [
+  {
+   "date": "2026-10-07",
+   "sentence": "他被一个骗子骗了钱。",
+   "source": "Lesson 2026-10-07",
+   "translation": "He was scammed by a con artist."
   }
  ]
 }
