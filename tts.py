@@ -15,7 +15,7 @@ Needs: pip install sherpa-onnx soundfile ; ffmpeg (or imageio-ffmpeg).
 import os, re, sys, subprocess, tempfile, shutil
 
 VOICE_ID = 50          # Kokoro multi-lang v1.0: 50 = zm_yunxi (male, Mandarin)
-SPEED = 0.8
+SPEED = 0.9
 MODEL = "kokoro-multi-lang-v1_0"
 URL = f"https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/{MODEL}.tar.bz2"
 CACHE = os.path.expanduser("~/.cache/tts-voices")
