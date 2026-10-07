@@ -18,11 +18,11 @@ c) If the Docs tools are not available in this run, use pod/vocab_cache.json as 
 d) Run `python3 pod/srs.py select words.json TODAY` → the 3–8 words to use today. Use exactly these; don't pick words yourself.
 
 ## 2. News
-Pick 6 stories from the past 24 hours:
-- **World (2): Al Jazeera via the Webz.io connector.** Use the Webz.io news-search connector tools (MCP) to find Al Jazeera's latest articles: query `site:aljazeera.com`, newest first, published in the last 24 hours. Prefer major world stories; use the article text the connector returns. If the connector isn't available or returns nothing, fall back to WebSearch for Al Jazeera's top stories and say so in the final reply.
-- **China (2):** domestic news from inside China (society, economy, cities, culture, policy), e.g. Xinhua, China Daily, CGTN, South China Morning Post (WebSearch + WebFetch). Report factually and neutrally; where a source is state media, don't repeat its framing as fact.
-- **Germany (2): taz (https://taz.de/).** Get taz's current top stories, trying in this order: its RSS feed with curl (`curl -sL "https://taz.de/!p4608;rss/"`, then `curl -sL https://taz.de/rss.xml`), then WebFetch of https://taz.de/, then WebSearch restricted to taz.de. taz writes in German; summarise in simple Chinese. Confirm key facts with a second outlet if a detail seems unclear.
-If a source can't be reached, use another reputable outlet for that section and name the fallback in the final reply. Check key facts.
+Pick 6 stories from the past 24 hours. The routine's environment allows aljazeera.com and taz.de; the Webz.io connector (tool `news_search_by_webz`) needs no network permission.
+- **World (2): Al Jazeera.** Read its RSS feed: `curl -sL https://www.aljazeera.com/xml/rss/all.xml` and pick the 2 most important world stories from the last 24 hours; fetch an article page with curl if you need detail. If the feed fails, use `news_search_by_webz` (e.g. query "top world news", `days: 1`, `sort_by: "date_desc"`, `language: ["english"]`) or WebSearch, and name the fallback in the final reply.
+- **China (2):** domestic news from inside China (society, economy, cities, culture, policy). Use `news_search_by_webz` with `domain: ["chinadaily.com.cn", "news.cgtn.com", "cgtn.com", "scmp.com", "xinhuanet.com", "news.cn", "sixthtone.com", "caixinglobal.com"]`, `days: 1`, `sort_by: "date_desc"`; WebSearch as fallback. Report factually and neutrally; where a source is state media, don't repeat its framing (e.g. opinion columns) as fact — prefer factual reports over commentary.
+- **Germany (2): taz.** Read taz's RSS feed: `curl -sL "https://taz.de/!p4608;rss/"` (fallback `curl -sL https://taz.de/rss.xml`, then the homepage https://taz.de/). Pick the 2 most important German stories of the last 24 hours. taz writes in German; summarise in simple Chinese. If taz can't be reached, use `news_search_by_webz` with `language: ["german"]`, `country: ["DE"]`, `days: 1` and name the fallback.
+Check key facts against a second source when something is unclear.
 
 ## 3. Script (simplified Chinese only, written to be spoken)
 - Mainly words Kian knows: pod/known_words.json plus the vocabulary words. Short sentences.
