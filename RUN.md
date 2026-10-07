@@ -26,14 +26,19 @@ Pick 6 stories from the past 24 hours (48 hours if a section has too little). Th
 
 Check key facts against a second source when something is unclear.
 
-## 3. Script (simplified Chinese only, written to be spoken)
+## 3. Script (spoken; Chinese, with short English parts only where stated)
 - Mainly words Kian knows: pod/known_words.json plus the vocabulary words. Short sentences.
-- Structure: greeting with today's date and weekday → Middle East → China → Germany (each story: headline sentence, then 3–5 sentences of context) → 1-minute review of the selected vocabulary words.
+- Overall: greeting with today's date and weekday (Chinese) → 6 stories in the order Middle East, China, Germany → 1-minute review of the selected vocabulary words.
+- **Each story has three parts, in this order:**
+  1. **English one-line intro**, one short sentence: "Our first story is from Al Jazeera and is about …" (then "Our next story is from …", "Our last story is from …"). Write numbers as English words here.
+  2. **New words for this story** (only the story's unknown words that you keep; 1–4 per story; skip this part if there are none): say "New words." then each word in Chinese followed by its English translation, e.g. "谈判，negotiation。制裁，sanctions。" No pinyin in the spoken script.
+  3. **The story in Chinese**: headline sentence, then 4–6 sentences of context. Pre-taught words need no further explanation inside the story.
 - Use each selected vocabulary word naturally at least twice before the review.
 - Review: for each selected word, say the word, then one example sentence. If pod/teacher_sentences.json has sentences for it (from Kian's teachers), use one (rotate), say "老师的例句：" first and read it as written; otherwise make a new simple sentence.
-- Length: about 2,200–2,500 Chinese characters (≈10 min), explanations included.
-- For text-to-speech: numbers, dates and percentages in Chinese characters; no Latin letters, abbreviations or symbols (欧盟, 美国, 百分之三 …); full Chinese punctuation; one paragraph per story, separated by a blank line.
-- Check: save as script.txt, run `python3 pod/level/check_script.py script.txt words.json`. For every "unknown" word: replace it with a simpler known word, or keep it and explain it right after first use in one short, simple Chinese sentence (e.g. "……关税，也就是进口商品要交的税……"). Briefly explain lesser-known names. At most ~8 explained words; re-run until coverage ≥ 0.95. Explanations must use known words; teacher sentences are exempt.
+- Length: about 3,000 Chinese characters plus the English lines (≈10 minutes). The last episode came out at only 7 minutes, so don't go shorter.
+- For text-to-speech, in the Chinese parts: numbers, dates and percentages in Chinese characters; no Latin letters, abbreviations or symbols (欧盟, 美国, 百分之三 …); full Chinese punctuation. English is allowed only in the intro sentence and the word translations. Avoid colons. Each story (intro + new words + story) is one paragraph, separated from the next by a blank line.
+- Check: save the spoken script as script.txt. Make check_words.json = words.json plus every pre-taught new word (as {"hanzi": …}), then run `python3 pod/level/check_script.py script.txt check_words.json`. For every remaining "unknown" word: replace it with a simpler known word, or pre-teach it in that story's "New words" part. At most ~10 pre-taught words per episode; re-run until coverage ≥ 0.95. Briefly explain lesser-known names in Chinese. Teacher sentences are exempt.
+- Write transcript.txt: identical to script.txt, except each pre-taught word also gets its pinyin, e.g. "谈判 (tánpàn), negotiation". It goes into the episode's show notes.
 - Write used.json = the selected vocabulary words that actually appear in the final script (exact match).
 
 ## 4. Audio
@@ -43,7 +48,7 @@ Check key facts against a second source when something is unclear.
 ## 5. Publish + record (push straight to main: GitHub Pages serves the feed from main)
 ```
 cd pod
-python3 publish.py <path-to-mp3> TODAY "<title>" "<description>"
+python3 publish.py <path-to-mp3> TODAY "<title>" "<description>" ../transcript.txt
 python3 srs.py record ../words.json TODAY ../used.json > ../stats.json
 git add -A
 git commit -qm "Episode TODAY"
@@ -51,7 +56,7 @@ git push origin HEAD:main
 git fetch -q origin && test "$(git rev-parse HEAD)" = "$(git rev-parse origin/main)" && echo PUSHED-OK
 ```
 - Title: `TODAY · ` + a short Chinese headline of the top story.
-- Description: 2–4 lines in English with each story's headline and source, then "Vocabulary: " + practised words (hanzi + pinyin), then "Explained: " + explained new words (hanzi + pinyin + English).
+- Description (short summary; the full transcript is added automatically from transcript.txt): one line per story in English with its source, then "Vocabulary: " + practised words (hanzi + pinyin), then "New words: " + pre-taught words (hanzi + pinyin + English).
 - Don't modify publish.py, srs.py, vocab_import.py, RUN.md, teacher_sentences.json, level/, known_words.json, the cover or feed settings.
 - Continue to step 6 only after PUSHED-OK. If the push fails: `git pull --rebase origin main`, push again; if it still fails, skip step 6 and start the final reply with "PUSH FAILED:" plus the exact git error. Don't try other credentials or workarounds.
 
