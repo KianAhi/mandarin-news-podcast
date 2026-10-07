@@ -31,19 +31,33 @@ Check key facts against a second source when something is unclear.
 - Overall: greeting with today's date and weekday (Chinese) → 6 stories in the order Middle East, China, Germany → 1-minute review of the selected vocabulary words.
 - **Each story has three parts, in this order:**
   1. **English one-line intro**, one short sentence: "Our first story is from Al Jazeera and is about …" (then "Our next story is from …", "Our last story is from …"). Write numbers as English words here.
-  2. **New words for this story** (only the story's unknown words that you keep; 1–4 per story; skip this part if there are none): say "New words." then each word in Chinese followed by its English translation, e.g. "谈判，negotiation。制裁，sanctions。" No pinyin in the spoken script.
-  3. **The story in Chinese**: headline sentence, then 4–6 sentences of context. Pre-taught words need no further explanation inside the story.
+  2. **New words for this story** (only the story's unknown words that you keep; 1–4 per story; skip this part if there are none): a line "New words.", then for each word one line with the Chinese word and the next line with its English translation followed by `[pause]`. No pinyin in the spoken script.
+  3. **The story in Chinese**: headline sentence, then 7–9 sentences of context (about 250 characters), on one line. Pre-taught words need no further explanation inside the story.
+- **Layout = pauses.** The voice pauses 0.8 s at every line break, 1.6 s at a blank line, about 0.5 s between sentences, and 1.2 s extra at `[pause]`. So keep this layout exactly (blank line between stories):
+  ```
+  Our first story is from Al Jazeera and is about new talks between Iran and the United States.
+  New words.
+  谈判
+  negotiation. [pause]
+  制裁
+  sanctions. [pause]
+  伊朗和美国今天在阿曼开始了新的谈判。双方都说……
+
+  Our next story is from taz and is about …
+  ```
 - Use each selected vocabulary word naturally at least twice before the review.
-- Review: for each selected word, say the word, then one example sentence. If pod/teacher_sentences.json has sentences for it (from Kian's teachers), use one (rotate), say "老师的例句：" first and read it as written; otherwise make a new simple sentence.
-- Length: about 3,000 Chinese characters plus the English lines (≈10 minutes). The last episode came out at only 7 minutes, so don't go shorter.
-- For text-to-speech, in the Chinese parts: numbers, dates and percentages in Chinese characters; no Latin letters, abbreviations or symbols (欧盟, 美国, 百分之三 …); full Chinese punctuation. English is allowed only in the intro sentence and the word translations. Avoid colons. Each story (intro + new words + story) is one paragraph, separated from the next by a blank line.
+- Review: for each selected word, one line with the word followed by `[pause]`, then the next line with one example sentence. If pod/teacher_sentences.json has sentences for it (from Kian's teachers), use one (rotate), say "老师的例句：" first and read it as written; otherwise make a new simple sentence.
+- Length: 10 minutes of audio, which is about 1,800 Chinese characters in total with this slow voice and its pauses. After the check below, run `python3 pod/tts.py --estimate script.txt`: it must say 9.5–11 min. If it's shorter, add sentences to the stories; if longer, trim them. Then re-run the check.
+- For text-to-speech, in the Chinese parts: numbers, dates and percentages in Chinese characters; no Latin letters, abbreviations or symbols (欧盟, 美国, 百分之三 …); full Chinese punctuation. English is allowed only in the intro sentence and the word translations. Avoid colons.
 - Check: save the spoken script as script.txt. Make check_words.json = words.json plus every pre-taught new word (as {"hanzi": …}), then run `python3 pod/level/check_script.py script.txt check_words.json`. For every remaining "unknown" word: replace it with a simpler known word, or pre-teach it in that story's "New words" part. At most ~10 pre-taught words per episode; re-run until coverage ≥ 0.95. Briefly explain lesser-known names in Chinese. Teacher sentences are exempt.
-- Write transcript.txt: identical to script.txt, except each pre-taught word also gets its pinyin, e.g. "谈判 (tánpàn), negotiation". It goes into the episode's show notes.
+- Write transcript.txt: identical to script.txt without the `[pause]` marks, and each pre-taught word line also gets its pinyin, e.g. "谈判 (tánpàn)". It goes into the episode's show notes.
 - Write used.json = the selected vocabulary words that actually appear in the final script (exact match).
 
 ## 4. Audio
-- `curl -sSL -o melo.tar.bz2 https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-melo-tts-zh_en.tar.bz2 && tar xjf melo.tar.bz2`
-- Synthesize each paragraph with sherpa_onnx.OfflineTts: OfflineTtsVitsModelConfig(model="vits-melo-tts-zh_en/model.onnx", lexicon="vits-melo-tts-zh_en/lexicon.txt", tokens="vits-melo-tts-zh_en/tokens.txt", dict_dir="vits-melo-tts-zh_en/dict"), num_threads=4, rule_fsts="vits-melo-tts-zh_en/date.fst,vits-melo-tts-zh_en/phone.fst,vits-melo-tts-zh_en/number.fst"; generate(text, sid=0, speed=0.85). Join with ~0.8 s silence, write a WAV, convert with ffmpeg to mono MP3 at 64 kbps (`-ac 1 -b:a 64k`).
+- `python3 pod/tts.py script.txt episode.mp3`. Voice: Kokoro "yunxi" at speed 0.8, with the pauses from the script layout; it downloads the voice from GitHub on first use (~380 MB) and prints the episode length at the end.
+- It takes about 6–8 minutes, close to the limit of one Bash call, so run it in the background and check until it's done:
+  `nohup python3 pod/tts.py script.txt episode.mp3 > tts.log 2>&1 &` then every minute or two `tail -3 tts.log` until it shows `episode.mp3: … min` (or an error).
+- If it fails, run it once more; if it fails again, stop and report the error. Don't switch to another voice.
 
 ## 5. Publish + record (push straight to main: GitHub Pages serves the feed from main)
 ```
@@ -57,7 +71,7 @@ git fetch -q origin && test "$(git rev-parse HEAD)" = "$(git rev-parse origin/ma
 ```
 - Title: `TODAY · ` + a short Chinese headline of the top story.
 - Description (short summary; the full transcript is added automatically from transcript.txt): one line per story in English with its source, then "Vocabulary: " + practised words (hanzi + pinyin), then "New words: " + pre-taught words (hanzi + pinyin + English).
-- Don't modify publish.py, srs.py, vocab_import.py, RUN.md, teacher_sentences.json, level/, known_words.json, the cover or feed settings.
+- Don't modify publish.py, srs.py, tts.py, vocab_import.py, RUN.md, teacher_sentences.json, level/, known_words.json, the cover or feed settings.
 - Continue to step 6 only after PUSHED-OK. If the push fails: `git pull --rebase origin main`, push again; if it still fails, skip step 6 and start the final reply with "PUSH FAILED:" plus the exact git error. Don't try other credentials or workarounds.
 
 ## 6. Mirror stats into the doc
